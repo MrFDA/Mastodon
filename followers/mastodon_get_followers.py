@@ -32,7 +32,7 @@ def get_next_page(url):
     return link
 
 def get_all_followers(username,srv):    
-    url_end = '/users/' + username + '/following'
+    url_end = '/users/' + username + '/followers'
     followers = []
     while url_end != '':
         url = 'https://' + srv + url_end
