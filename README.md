@@ -1,1 +1,1 @@
-Mastodon
+# Miscellanous scripts for Mastodon
