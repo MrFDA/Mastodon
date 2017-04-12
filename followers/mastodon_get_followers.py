@@ -27,8 +27,13 @@ def get_next_page(url):
     link = [e.attrib['href'] for e in page("a.next_page")]
     if len(link)>0:
         link = link[0]
-    else:
-        link = ''
+    else: # class and "embedding" of the link to the next page seems to vary...
+        span = page("span.next")
+        link = [e.attrib['href'] for e in span('a')]
+        if len(link)>0:
+            link = link[0]
+        else:
+            link = ''
     return link
 
 def get_all_followers(username,srv):    
