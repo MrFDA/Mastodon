@@ -20,10 +20,10 @@ def parseArgs():
 def get_follow(url):
     page = pq(url)
     users = [e.text for e in page("span.username")]
-    return users
+    link = get_next_page(page)
+    return (users,link)
 
-def get_next_page(url):
-    page = pq(url)
+def get_next_page(page):
     link = [e.attrib['href'] for e in page("a.next_page")]
     if len(link)>0:
         link = link[0]
@@ -41,8 +41,8 @@ def get_all_followers(username,srv):
     followers = []
     while url_end != '':
         url = 'https://' + srv + url_end
-        followers = followers + get_follow(url)
-        url_end = get_next_page(url)
+        (p_follow,url_end) = get_follow(url)
+        followers = followers + p_follow
     return followers
 
 def main():
